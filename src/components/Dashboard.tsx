@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import ToggleCard from "./ToggleCard";
 import InstallPrompt from "./InstallPrompt";
-import { Zap, Activity, Target, Eye, LogOut, LayoutGrid, ShieldCheck, CheckCircle2, PartyPopper } from "lucide-react";
+import { Zap, Activity, Target, Eye, LogOut, LayoutGrid, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -143,8 +143,8 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white/80 transition-all">
                 {greeting}, <span className="text-white drop-shadow-[0_0_15px_rgba(176,108,255,0.6)] font-black">{username}</span>
               </h2>
-              <h3 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-tight">
-                PAINEL DE <span className="text-primary text-neon tracking-normal uppercase animate-pulse-soft">CONTROLE</span>
+              <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-white leading-tight">
+                PAINEL <span className="text-primary text-neon tracking-normal uppercase animate-pulse-soft">HEADTRICK</span>
               </h3>
             </div>
             
