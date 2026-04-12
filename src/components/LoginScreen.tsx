@@ -75,18 +75,11 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
       <Card className="w-full max-w-md glass-premium relative z-10 border-primary/20 overflow-hidden animate-in fade-in zoom-in-95 duration-700">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
         
-        <CardHeader className="text-center relative pt-12 pb-8">
-          <div className="relative mx-auto w-20 h-20 mb-6 group">
-            <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/30 transition-all duration-500" />
-            <div className="relative z-10 w-full h-full bg-black/40 rounded-full flex items-center justify-center border border-primary/40 shadow-neon-purple animate-pulse-soft">
-              <Lock className="text-primary w-9 h-9 drop-shadow-[0_0_8px_rgba(176,108,255,0.8)]" />
-            </div>
-          </div>
-          
+        <CardHeader className="text-center relative pt-16 pb-10">
           <CardTitle className="text-4xl font-black tracking-tighter text-neon font-headline text-white leading-none">
             NEVASFZ <span className="text-white/90">HEADTRICK</span>
           </CardTitle>
-          <p className="text-white/60 text-sm mt-4 font-medium tracking-wide uppercase">
+          <p className="text-white/60 text-sm mt-5 font-medium tracking-wide uppercase">
             Identifique-se para acessar o sistema
           </p>
         </CardHeader>
