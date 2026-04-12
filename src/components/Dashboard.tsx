@@ -4,9 +4,10 @@
 import React, { useState, useEffect } from 'react';
 import ToggleCard from "./ToggleCard";
 import InstallPrompt from "./InstallPrompt";
-import { Zap, Activity, Target, Eye, LogOut, LayoutGrid, ShieldCheck } from "lucide-react";
+import { Zap, Activity, Target, Eye, LogOut, LayoutGrid, ShieldCheck, CheckCircle2, PartyPopper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface DashboardProps {
   onLogout: () => void;
@@ -16,6 +17,9 @@ interface DashboardProps {
 export default function Dashboard({ onLogout, username }: DashboardProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [greeting, setGreeting] = useState("Bem-vindo");
+  const [activeCount, setActiveCount] = useState(0);
+  const [showHeadtrickActive, setShowHeadtrickActive] = useState(false);
+  const [isFullyOptimized, setIsFullyOptimized] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -24,6 +28,29 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
     else if (hours < 18) setGreeting("Boa tarde");
     else setGreeting("Boa noite");
   }, []);
+
+  const handleToggleChange = (isActive: boolean) => {
+    setActiveCount(prev => {
+      const newCount = isActive ? prev + 1 : prev - 1;
+      
+      // Check if all 4 are active
+      if (newCount === 4) {
+        setIsFullyOptimized(true);
+        setShowHeadtrickActive(true);
+        // Auto-hide success message after 6 seconds
+        setTimeout(() => setShowHeadtrickActive(false), 6000);
+        
+        // Haptic feedback for full activation
+        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+          navigator.vibrate([100, 50, 100]);
+        }
+      } else {
+        setIsFullyOptimized(false);
+      }
+      
+      return newCount;
+    });
+  };
 
   if (!isMounted) return null;
 
@@ -35,6 +62,32 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
         <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-secondary/10 rounded-full blur-[100px] animate-float opacity-30" style={{ animationDelay: '-5s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,#0a0514_90%)]" />
       </div>
+
+      {/* Success Notification Overlay */}
+      {showHeadtrickActive && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-lg animate-in fade-in slide-in-from-top-4 duration-500">
+          <div className="glass-premium p-6 rounded-2xl border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.3)] bg-emerald-500/10 backdrop-blur-3xl overflow-hidden relative">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent animate-shimmer" />
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                <CheckCircle2 className="text-emerald-400 w-7 h-7 animate-bounce" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-emerald-400 font-black text-sm uppercase tracking-wider">Configuração concluída com sucesso</h4>
+                <p className="text-white/80 text-xs font-bold">Agora basta abrir o Free Fire, o Headtrick já está ativo.</p>
+              </div>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={() => setShowHeadtrickActive(false)}
+                className="ml-auto text-white/40 hover:text-white"
+              >
+                OK
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Install App Prompt */}
       <InstallPrompt />
@@ -112,21 +165,25 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
             title="0 Delay" 
             icon={<Zap />} 
             description="Elimina o input lag e otimiza a resposta de comandos via hardware." 
+            onToggleChange={handleToggleChange}
           />
           <ToggleCard 
             title="Estabilizador" 
             icon={<Activity />} 
             description="Remove micro-vibrações e estabiliza a movimentação de sensores." 
+            onToggleChange={handleToggleChange}
           />
           <ToggleCard 
             title="Ajuste de Mira" 
             icon={<Target />} 
             description="Rastreio adaptativo via IA para suavização de movimentos bruscos." 
+            onToggleChange={handleToggleChange}
           />
           <ToggleCard 
             title="Otimização Visual" 
             icon={<Eye />} 
             description="Filtros de pós-processamento para clareza visual superior." 
+            onToggleChange={handleToggleChange}
           />
         </div>
 
@@ -137,23 +194,41 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 animate-in slide-in-from-bottom-4 duration-700">
           <div className="glass-premium p-6 rounded-2xl flex items-center gap-5 border-primary/20 hover:border-primary/40 transition-all group overflow-hidden relative">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="text-primary font-black text-4xl text-neon group-hover:scale-110 transition-transform">99+</div>
+            <div className="text-primary font-black text-4xl text-neon group-hover:scale-110 transition-transform">{activeCount * 25}%</div>
             <div className="space-y-1">
               <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-black">Performance</div>
-              <div className="text-xs text-white/80 font-bold uppercase tracking-widest">Otimizações Ativas</div>
+              <div className="text-xs text-white/80 font-bold uppercase tracking-widest">Carga de Otimização</div>
             </div>
           </div>
 
-          <div className="glass-premium p-6 rounded-2xl flex items-center gap-5 border-emerald-500/20 hover:border-emerald-500/40 transition-all group relative overflow-hidden">
+          <div className={cn(
+            "glass-premium p-6 rounded-2xl flex items-center gap-5 transition-all group relative overflow-hidden border-emerald-500/20 hover:border-emerald-500/40",
+            isFullyOptimized && "bg-emerald-500/5 border-emerald-500/40 shadow-[0_0_20px_rgba(16,185,129,0.1)]"
+          )}>
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative flex items-center justify-center">
-              <div className="text-emerald-400 font-black text-3xl group-hover:scale-110 transition-transform tracking-tighter uppercase italic">Stable</div>
-              <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-500" />
+              <div className={cn(
+                "font-black text-3xl group-hover:scale-110 transition-all tracking-tighter uppercase italic",
+                isFullyOptimized ? "text-emerald-400 text-neon" : "text-emerald-400"
+              )}>
+                {isFullyOptimized ? "Headtrick Ativo" : "Stable"}
+              </div>
+              <div className={cn(
+                "absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-500 animate-ping",
+                isFullyOptimized && "bg-emerald-400"
+              )} />
+              <div className={cn(
+                "absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-500",
+                isFullyOptimized && "bg-emerald-400"
+              )} />
             </div>
             <div className="space-y-1">
-              <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-black">Global Hub</div>
-              <div className="text-xs text-white/80 font-bold uppercase tracking-widest">Status da Rede</div>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-black">
+                {isFullyOptimized ? "Ready for Action" : "Global Hub"}
+              </div>
+              <div className="text-xs text-white/80 font-bold uppercase tracking-widest">
+                {isFullyOptimized ? "Sistema Pronto" : "Status da Rede"}
+              </div>
             </div>
           </div>
 

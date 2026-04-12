@@ -1,7 +1,7 @@
 
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Loader2, CheckCircle2, Sparkles } from "lucide-react";
@@ -11,9 +11,10 @@ interface ToggleCardProps {
   title: string;
   icon: React.ReactNode;
   description: string;
+  onToggleChange?: (active: boolean) => void;
 }
 
-export default function ToggleCard({ title, icon, description }: ToggleCardProps) {
+export default function ToggleCard({ title, icon, description, onToggleChange }: ToggleCardProps) {
   const [isActive, setIsActive] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -29,12 +30,19 @@ export default function ToggleCard({ title, icon, description }: ToggleCardProps
       setIsProcessing(false);
       setShowSuccess(true);
       setIsActive(true);
+      onToggleChange?.(true);
+      
+      // Vibration feedback for mobile
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        navigator.vibrate(50);
+      }
       
       setTimeout(() => setShowSuccess(false), 2500);
     } else {
       setIsActive(false);
       setIsProcessing(false);
       setShowSuccess(false);
+      onToggleChange?.(false);
     }
   };
 
