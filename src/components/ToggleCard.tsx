@@ -1,9 +1,10 @@
+
 "use client"
 
 import React, { useState } from 'react';
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { Loader2, CheckCircle2 } from "lucide-react";
+import { Loader2, CheckCircle2, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ToggleCardProps {
@@ -22,15 +23,14 @@ export default function ToggleCard({ title, icon, description }: ToggleCardProps
       setIsProcessing(true);
       setShowSuccess(false);
       
-      // Simulate script loading
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Artificial delay for premium system feel
+      await new Promise(resolve => setTimeout(resolve, 1500));
       
       setIsProcessing(false);
       setShowSuccess(true);
       setIsActive(true);
       
-      // Clear success message after 3 seconds
-      setTimeout(() => setShowSuccess(false), 3000);
+      setTimeout(() => setShowSuccess(false), 2500);
     } else {
       setIsActive(false);
       setIsProcessing(false);
@@ -40,68 +40,81 @@ export default function ToggleCard({ title, icon, description }: ToggleCardProps
 
   return (
     <Card className={cn(
-      "glass p-5 flex flex-col gap-4 relative overflow-hidden transition-all duration-500",
-      isActive ? "border-primary/40 bg-primary/5" : "border-white/5 hover:border-white/10"
+      "glass-premium p-6 flex flex-col gap-5 relative overflow-hidden transition-all duration-500 group",
+      isActive 
+        ? "border-primary/40 bg-primary/10 -translate-y-1 shadow-neon-purple-strong" 
+        : "border-white/5 hover:border-white/20 hover:-translate-y-1.5 hover:shadow-2xl"
     )}>
-      {/* Background Glow Effect when active */}
+      {/* Energy Shimmer Effect */}
+      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-10 transition-opacity duration-700">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent -translate-x-full group-hover:animate-shimmer" />
+      </div>
+
+      {/* Active Glow */}
       {isActive && (
-        <div className="absolute -right-10 -top-10 w-24 h-24 bg-primary/20 blur-3xl pointer-events-none" />
+        <div className="absolute -right-8 -top-8 w-32 h-32 bg-primary/20 blur-[60px] pointer-events-none animate-pulse" />
       )}
 
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between relative z-10">
         <div className={cn(
-          "w-12 h-12 rounded-xl flex items-center justify-center border transition-all duration-300",
+          "w-14 h-14 rounded-2xl flex items-center justify-center border transition-all duration-500 group-hover:scale-110",
           isActive 
-            ? "bg-primary/20 border-primary/30 shadow-neon-purple text-primary" 
-            : "bg-white/5 border-white/10 text-muted-foreground"
+            ? "bg-primary/20 border-primary/40 shadow-neon-purple text-primary" 
+            : "bg-white/5 border-white/10 text-white/40 group-hover:text-white/70 group-hover:border-white/20"
         )}>
-          {React.cloneElement(icon as React.ReactElement, { size: 24 })}
+          {React.cloneElement(icon as React.ReactElement, { 
+            size: 28,
+            className: cn(isActive && "drop-shadow-[0_0_8px_rgba(176,108,255,0.8)]")
+          })}
         </div>
         <Switch 
           checked={isActive || isProcessing} 
           onCheckedChange={handleToggle}
           disabled={isProcessing}
-          className="data-[state=checked]:bg-primary"
+          className={cn(
+            "transition-all duration-500",
+            isActive ? "data-[state=checked]:bg-primary shadow-neon-purple scale-110" : ""
+          )}
         />
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-2 relative z-10">
         <h3 className={cn(
-          "font-bold text-lg tracking-tight transition-colors",
-          isActive ? "text-primary text-neon" : "text-white"
+          "font-black text-xl tracking-tight transition-all duration-300",
+          isActive ? "text-primary text-neon" : "text-white/90 group-hover:text-white"
         )}>
           {title}
         </h3>
-        <p className="text-xs text-muted-foreground leading-relaxed">
+        <p className="text-xs text-white/40 font-medium leading-relaxed min-h-[3rem] group-hover:text-white/60 transition-colors">
           {description}
         </p>
       </div>
 
-      <div className="h-6 flex items-center">
+      <div className="h-6 flex items-center relative z-10">
         {isProcessing && (
-          <div className="flex items-center gap-2 text-[10px] font-bold text-primary animate-pulse">
+          <div className="flex items-center gap-2 text-[10px] font-black text-primary animate-pulse">
             <Loader2 size={12} className="animate-spin" />
-            <span className="uppercase tracking-widest">Ativando...</span>
+            <span className="uppercase tracking-[0.2em]">Sincronizando...</span>
           </div>
         )}
         {showSuccess && (
-          <div className="flex items-center gap-2 text-[10px] font-bold text-emerald-400 animate-in fade-in slide-in-from-left-2">
+          <div className="flex items-center gap-2 text-[10px] font-black text-emerald-400 animate-in fade-in slide-in-from-left-2 duration-300">
             <CheckCircle2 size={12} />
-            <span className="uppercase tracking-widest">Ativado com sucesso</span>
+            <span className="uppercase tracking-[0.2em]">{title} Ativado</span>
           </div>
         )}
         {!isProcessing && !showSuccess && isActive && (
-          <div className="flex items-center gap-2 text-[10px] font-bold text-primary/60">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="uppercase tracking-widest">Sistema Operacional</span>
+          <div className="flex items-center gap-2 text-[10px] font-black text-primary/80">
+            <Sparkles size={12} className="animate-pulse" />
+            <span className="uppercase tracking-[0.2em]">Protocolo Ativo</span>
           </div>
         )}
       </div>
 
       {/* Futuristic Progress Bar during loading */}
       {isProcessing && (
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5">
-          <div className="h-full bg-primary animate-[shimmer_2s_infinite] shadow-neon-purple" style={{ width: '100%' }} />
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5 overflow-hidden">
+          <div className="h-full bg-primary shadow-neon-purple w-full animate-shimmer" />
         </div>
       )}
     </Card>
