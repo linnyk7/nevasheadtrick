@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ToggleCard from "./ToggleCard";
+import InstallPrompt from "./InstallPrompt";
 import { Zap, Activity, Target, Eye, LogOut, LayoutGrid, ShieldCheck, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +30,9 @@ export default function Dashboard({ onLogout }: DashboardProps) {
         <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-secondary/10 rounded-full blur-[100px] animate-float opacity-30" style={{ animationDelay: '-5s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,#0a0514_90%)]" />
       </div>
+
+      {/* Install App Prompt */}
+      <InstallPrompt />
 
       {/* Header */}
       <header className="glass-premium border-b border-white/5 px-6 py-4 flex items-center justify-between sticky top-0 z-50 backdrop-blur-xl">
@@ -76,7 +80,7 @@ export default function Dashboard({ onLogout }: DashboardProps) {
             <span className="text-[9px] text-primary font-black uppercase tracking-[0.3em]">Dashboard Operational</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-tight">
-            Painel de <span className="text-primary text-neon tracking-normal ml-1">CONTROLE</span>
+            Painel de <span className="text-primary text-neon tracking-normal ml-1 uppercase">Controle</span>
           </h2>
           <p className="text-lg text-white/60 max-w-2xl font-medium leading-relaxed">
             Configure as otimizações avançadas do sistema para obter <span className="text-white">precisão absoluta</span> e desempenho extremo em tempo real.
@@ -129,7 +133,7 @@ export default function Dashboard({ onLogout }: DashboardProps) {
           <div className="glass-premium p-6 rounded-2xl flex items-center gap-5 border-emerald-500/20 hover:border-emerald-500/40 transition-all group relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative flex items-center justify-center">
-              <div className="text-emerald-400 font-black text-3xl group-hover:scale-110 transition-transform tracking-tighter">STABLE</div>
+              <div className="text-emerald-400 font-black text-3xl group-hover:scale-110 transition-transform tracking-tighter uppercase italic">Stable</div>
               <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-500" />
             </div>

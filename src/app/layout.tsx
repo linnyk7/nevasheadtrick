@@ -1,9 +1,11 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: 'NEVASFZ HEADTRICK',
   description: 'The ultimate gamer control panel',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -17,6 +19,15 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js');
+              });
+            }
+          `
+        }} />
       </head>
       <body className="font-body antialiased bg-background text-foreground overflow-x-hidden min-h-screen">
         {children}

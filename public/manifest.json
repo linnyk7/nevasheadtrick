@@ -1,0 +1,22 @@
+
+{
+  "name": "NEVASFZ HEADTRICK",
+  "short_name": "HEADTRICK",
+  "description": "The ultimate gamer control panel",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0514",
+  "theme_color": "#B06CFF",
+  "icons": [
+    {
+      "src": "https://picsum.photos/seed/fz1/192/192",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://picsum.photos/seed/fz2/512/512",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
