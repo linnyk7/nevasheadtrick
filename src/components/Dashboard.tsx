@@ -4,20 +4,25 @@
 import React, { useState, useEffect } from 'react';
 import ToggleCard from "./ToggleCard";
 import InstallPrompt from "./InstallPrompt";
-import { Zap, Activity, Target, Eye, LogOut, LayoutGrid, ShieldCheck, Globe } from "lucide-react";
+import { Zap, Activity, Target, Eye, LogOut, LayoutGrid, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 
 interface DashboardProps {
   onLogout: () => void;
+  username: string;
 }
 
-export default function Dashboard({ onLogout }: DashboardProps) {
+export default function Dashboard({ onLogout, username }: DashboardProps) {
   const [isMounted, setIsMounted] = useState(false);
+  const [greeting, setGreeting] = useState("Bem-vindo");
 
   useEffect(() => {
     setIsMounted(true);
+    const hours = new Date().getHours();
+    if (hours < 12) setGreeting("Bom dia");
+    else if (hours < 18) setGreeting("Boa tarde");
+    else setGreeting("Boa noite");
   }, []);
 
   if (!isMounted) return null;
@@ -74,17 +79,26 @@ export default function Dashboard({ onLogout }: DashboardProps) {
       {/* Main Content */}
       <main className="flex-1 max-w-7xl mx-auto w-full p-6 md:p-12 space-y-12 relative z-10">
         {/* Welcome Section */}
-        <div className="space-y-4 animate-in fade-in slide-in-from-left-4 duration-700">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-[9px] text-primary font-black uppercase tracking-[0.3em]">Dashboard Operational</span>
+        <div className="space-y-6">
+          <div className="space-y-2 animate-in fade-in slide-in-from-left-4 duration-700">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-[9px] text-primary font-black uppercase tracking-[0.3em]">Dashboard Operational</span>
+            </div>
+            
+            <div className="space-y-1">
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white/80 transition-all">
+                {greeting}, <span className="text-white drop-shadow-[0_0_15px_rgba(176,108,255,0.6)] font-black">{username}</span>
+              </h2>
+              <h3 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-tight">
+                PAINEL DE <span className="text-primary text-neon tracking-normal uppercase animate-pulse-soft">CONTROLE</span>
+              </h3>
+            </div>
+            
+            <p className="text-lg md:text-xl text-white/60 max-w-2xl font-medium leading-relaxed pt-2">
+              Configure as otimizações avançadas do sistema para obter <span className="text-white">precisão absoluta</span> e desempenho extremo em tempo real.
+            </p>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-tight">
-            Painel de <span className="text-primary text-neon tracking-normal ml-1 uppercase">Controle</span>
-          </h2>
-          <p className="text-lg text-white/60 max-w-2xl font-medium leading-relaxed">
-            Configure as otimizações avançadas do sistema para obter <span className="text-white">precisão absoluta</span> e desempenho extremo em tempo real.
-          </p>
         </div>
 
         {/* Section Divider */}

@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState } from 'react';
@@ -8,7 +9,7 @@ import { Lock, User, ShieldAlert, Loader2, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface LoginScreenProps {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (username: string) => void;
 }
 
 export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
@@ -32,7 +33,7 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
     if (isValidUser && isValidPass) {
       setSuccessMsg("Conectando ao sistema...");
       setTimeout(() => {
-        onLoginSuccess();
+        onLoginSuccess(username);
       }, 1500);
     } else {
       setError("ACESSO NEGADO: CREDENCIAIS INVÁLIDAS");
