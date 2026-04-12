@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    --background: 275 19% 10%;
+    --background: 275 19% 7%;
     --foreground: 0 0% 98%;
-    --card: 275 19% 12%;
+    --card: 275 19% 10%;
     --card-foreground: 0 0% 98%;
-    --popover: 275 19% 10%;
+    --popover: 275 19% 8%;
     --popover-foreground: 0 0% 98%;
     --primary: 270 100% 71%;
     --primary-foreground: 0 0% 100%;
     --secondary: 234 48% 49%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 275 10% 20%;
-    --muted-foreground: 275 10% 70%;
+    --muted: 275 10% 15%;
+    --muted-foreground: 275 10% 65%;
     --accent: 234 48% 49%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 275 20% 20%;
-    --input: 275 20% 20%;
+    --border: 275 20% 15%;
+    --input: 275 20% 15%;
     --ring: 270 100% 71%;
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 }
 
@@ -32,26 +32,57 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground selection:bg-primary/30 selection:text-primary;
-    background-image: 
-      radial-gradient(circle at 50% -20%, rgba(176, 108, 255, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 0% 100%, rgba(66, 78, 186, 0.1) 0%, transparent 40%);
+    @apply bg-background text-foreground selection:bg-primary/30 selection:text-primary font-body antialiased overflow-x-hidden min-h-screen;
+    background: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #0a0514 100%);
   }
 }
 
-.glass {
-  @apply bg-card/60 backdrop-blur-xl border border-white/5;
-}
-
-.metallic-button {
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.2) 100%);
-  @apply border border-white/10 hover:border-white/20 transition-all duration-300;
-}
-
-.neon-glow {
-  box-shadow: 0 0 15px rgba(176, 108, 255, 0.4);
+.glass-premium {
+  @apply bg-card/40 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)];
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .text-neon {
-  text-shadow: 0 0 8px rgba(176, 108, 255, 0.6);
+  text-shadow: 0 0 10px rgba(176, 108, 255, 0.8), 0 0 20px rgba(176, 108, 255, 0.4);
+}
+
+.shadow-neon-purple {
+  box-shadow: 0 0 20px rgba(176, 108, 255, 0.5);
+}
+
+.shadow-neon-purple-strong {
+  box-shadow: 0 0 30px rgba(176, 108, 255, 0.7), inset 0 0 10px rgba(176, 108, 255, 0.3);
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33% { transform: translateY(-20px) translateX(10px); }
+  66% { transform: translateY(10px) translateX(-15px); }
+}
+
+.animate-float {
+  animation: float 10s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s infinite;
+}
+
+.input-glow-focus:focus-within {
+  @apply ring-2 ring-primary/40 border-primary/50 scale-[1.01] transition-all duration-300;
+  box-shadow: 0 0 15px rgba(176, 108, 255, 0.2);
 }
