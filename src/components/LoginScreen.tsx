@@ -43,19 +43,16 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center p-4 overflow-hidden">
-      {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] animate-float" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/10 rounded-full blur-[100px] animate-float" style={{ animationDelay: '-5s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-[radial-gradient(circle_at_center,transparent_0%,#0a0514_80%)]" />
         
-        {/* Particle-like shapes */}
         <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-primary rounded-full animate-pulse-soft blur-sm" />
         <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-secondary rounded-full animate-pulse-soft blur-sm" style={{ animationDelay: '1s' }} />
         <div className="absolute top-2/3 right-1/3 w-1.5 h-1.5 bg-white/20 rounded-full animate-pulse-soft" style={{ animationDelay: '2s' }} />
       </div>
 
-      {/* Overlay when loading */}
       <div className={cn(
         "fixed inset-0 z-50 bg-black/40 backdrop-blur-md transition-all duration-700 pointer-events-none flex items-center justify-center",
         isLoading || successMsg ? "opacity-100" : "opacity-0"
@@ -148,7 +145,6 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
                 )}
               </span>
               
-              {/* 3D Reflection Effect */}
               <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%)] bg-[length:250%_250%] group-hover:animate-shimmer" />
             </Button>
           </form>
@@ -164,7 +160,6 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
         </CardContent>
       </Card>
       
-      {/* Bottom Legal/Info */}
       <div className="fixed bottom-8 left-0 w-full text-center pointer-events-none">
         <p className="text-[10px] text-white/20 uppercase tracking-[0.5em] font-medium">
           PAINEL0FZ OS • SECURED SYSTEM V2.5.0

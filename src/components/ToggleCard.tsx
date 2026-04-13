@@ -102,13 +102,13 @@ export default function ToggleCard({ title, icon, description, onToggleChange }:
         {isProcessing && (
           <div className="flex items-center gap-2 text-[10px] font-black text-primary animate-pulse">
             <Loader2 size={12} className="animate-spin" />
-            <span className="uppercase tracking-[0.2em]">Sincronizando...</span>
+            <span className="uppercase tracking-[0.2em]">Aplicando otimização...</span>
           </div>
         )}
         {showSuccess && (
           <div className="flex items-center gap-2 text-[10px] font-black text-emerald-400 animate-in fade-in slide-in-from-left-2 duration-300">
             <CheckCircle2 size={12} />
-            <span className="uppercase tracking-[0.2em]">{title} Ativado</span>
+            <span className="uppercase tracking-[0.2em]">Ativado com sucesso</span>
           </div>
         )}
         {!isProcessing && !showSuccess && isActive && (
@@ -119,7 +119,6 @@ export default function ToggleCard({ title, icon, description, onToggleChange }:
         )}
       </div>
 
-      {/* Futuristic Progress Bar during loading */}
       {isProcessing && (
         <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5 overflow-hidden">
           <div className="h-full bg-primary shadow-neon-purple w-full animate-shimmer" />
