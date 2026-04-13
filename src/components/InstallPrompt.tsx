@@ -77,7 +77,7 @@ export default function InstallPrompt() {
           
           <div className="flex-1 space-y-1">
             <h4 className="text-sm font-black text-white tracking-tighter uppercase">
-              App <span className="text-primary text-neon">Headtrick</span>
+              App <span className="text-primary text-neon">Painel0fz</span>
             </h4>
             <p className="text-[11px] text-white/60 font-medium leading-tight">
               {isIOS 

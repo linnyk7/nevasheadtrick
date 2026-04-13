@@ -31,7 +31,7 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
     const isValidPass = password === "0";
 
     if (isValidUser && isValidPass) {
-      setSuccessMsg("Conectando ao sistema...");
+      setSuccessMsg("Entrando no Painel0fz...");
       setTimeout(() => {
         onLoginSuccess(username);
       }, 1500);
@@ -78,7 +78,7 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
         
         <CardHeader className="text-center relative pt-16 pb-10">
           <CardTitle className="text-4xl font-black tracking-tighter text-neon font-headline text-white leading-none">
-            NEVASFZ <span className="text-white/90">HEADTRICK</span>
+            PAINEL<span className="text-white/90">0FZ</span>
           </CardTitle>
           <p className="text-white/60 text-sm mt-5 font-medium tracking-wide uppercase">
             Identifique-se para acessar o sistema
@@ -167,7 +167,7 @@ export default function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
       {/* Bottom Legal/Info */}
       <div className="fixed bottom-8 left-0 w-full text-center pointer-events-none">
         <p className="text-[10px] text-white/20 uppercase tracking-[0.5em] font-medium">
-          NEVASFZ HEADTRICK OS • SECURED SYSTEM V2.5.0
+          PAINEL0FZ OS • SECURED SYSTEM V2.5.0
         </p>
       </div>
     </div>

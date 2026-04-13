@@ -74,7 +74,7 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
               </div>
               <div className="space-y-1">
                 <h4 className="text-emerald-400 font-black text-sm uppercase tracking-wider">Configuração concluída com sucesso</h4>
-                <p className="text-white/80 text-xs font-bold">Agora basta abrir o Free Fire, o Headtrick já está ativo.</p>
+                <p className="text-white/80 text-xs font-bold">Agora basta abrir o Free Fire, o Painel0fz já está ativo.</p>
               </div>
               <Button 
                 variant="ghost" 
@@ -100,7 +100,7 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
           </div>
           <div>
             <h1 className="text-2xl font-black tracking-tighter text-neon flex items-center gap-2">
-              NEVASFZ <span className="text-white/90 font-bold">HEADTRICK</span>
+              PAINEL<span className="text-white/90 font-bold">0FZ</span>
             </h1>
             <div className="md:hidden flex items-center gap-1.5 mt-0.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -144,7 +144,7 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
                 {greeting}, <span className="text-white drop-shadow-[0_0_15px_rgba(176,108,255,0.6)] font-black">{username}</span>
               </h2>
               <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-white leading-tight">
-                PAINEL <span className="text-primary text-neon tracking-normal uppercase animate-pulse-soft">HEADTRICK</span>
+                PAINEL <span className="text-primary text-neon tracking-normal uppercase animate-pulse-soft">0FZ</span>
               </h3>
             </div>
             
@@ -211,7 +211,7 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
                 "font-black text-3xl group-hover:scale-110 transition-all tracking-tighter uppercase italic",
                 isFullyOptimized ? "text-emerald-400 text-neon" : "text-emerald-400"
               )}>
-                {isFullyOptimized ? "Headtrick Ativo" : "Stable"}
+                {isFullyOptimized ? "Painel0fz Ativo" : "Stable"}
               </div>
               <div className={cn(
                 "absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-500 animate-ping",
@@ -246,7 +246,7 @@ export default function Dashboard({ onLogout, username }: DashboardProps) {
       {/* Footer */}
       <footer className="p-10 text-center border-t border-white/5 relative z-10">
         <p className="text-[10px] text-white/10 uppercase tracking-[0.6em] font-black hover:text-white/30 transition-colors cursor-default">
-          NEVASFZ HEADTRICK OS • SECURED PROTOCOL V2.5.0 • performance elite
+          PAINEL0FZ OS • SECURED PROTOCOL V2.5.0 • performance elite
         </p>
       </footer>
     </div>
